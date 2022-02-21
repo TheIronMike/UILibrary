@@ -237,6 +237,8 @@ function library:Create(name, size)
             Clicked.Name = "Click Effect"
             Clicked.Parent = Parent
             Clicked.BackgroundColor3 = Color3.fromRGB(library.buttoncontainer.R*255 + 30, library.buttoncontainer.G*255 + 30, library.buttoncontainer.B*255 + 30)
+            Clicked.AnchorPoint = Vector2.new(0.5, 0.5)
+            Clicked.Position = UDim2.new(0.5, 0, 0.5, 0)
             Clicked.BorderSizePixel = 0
             Clicked.Size = UDim2.new(0, 0, 1, 0)
 
