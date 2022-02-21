@@ -244,7 +244,7 @@ function library:Create(name, size)
 
             library:addRound(Clicked)
 
-            local EffectTween = ts:Create(Clicked, ti(0.1), {Size = UDim2.new(1, 0, 1, 0), BackgroundTransparency = 1})
+            local EffectTween = ts:Create(Clicked, ti(0.5), {Size = UDim2.new(1, 0, 1, 0), BackgroundTransparency = 1})
 
             EffectTween:Play()
 
