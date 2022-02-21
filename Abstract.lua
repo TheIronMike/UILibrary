@@ -1,17 +1,4 @@
---[[ Abstract 20 UI Library
-    Lib:Create(Name, Size)
-    
-    :Divider(Name)
-    
-    :Button(name, Description, Callback)
-    
-    :Toggle(Name, Description, InitState, Callback)
-    
-    :Dropdown(Name, Description, Table, Callback)
-    
-    :Slider(Name, Description, Min, Max, Default, Callback)
-]]
-
+---@diagnostic disable: unused-function, unused-local
 for i,v in next, game.CoreGui:GetChildren() do
     if v:FindFirstChild("UILIB") then
         v:Remove()
@@ -202,7 +189,7 @@ function library:Create(name, size)
 	UIPadding.Parent = Container
 	UIPadding.PaddingTop = UDim.new(0, 10)
 
-	Search.Changed:connect(function(text)
+	Search.Changed:Connect(function(text)
 		updatescroll()
 		local text = Search.Text:lower()
 		if text ~= "" then
@@ -244,6 +231,27 @@ function library:Create(name, size)
 		name = name or "Button"
 		description = description or "Button's description"
 		callback = callback or function() end
+
+        local function ClickEffect(Parent)
+            local Clicked = Instance.new("Frame")
+            Clicked.Name = "Click Effect"
+            Clicked.Parent = Parent
+            Clicked.BackgroundColor3 = Color3.fromRGB(library.buttoncontainer.R*255 + 30, library.buttoncontainer.G*255 + 30, library.buttoncontainer.B*255 + 30)
+            Clicked.BorderSizePixel = 0
+            Clicked.Size = UDim2.new(0, 0, 1, 0)
+            Clicked.Text = ""
+            Clicked.AutoButtonColor = false
+
+            library:addRound(Clicked)
+
+            local EffectTween = ts:Create(Clicked, ti(0.1), {Size = UDim2.new(1, 0, 1, 0), BackgroundTransparency = 1})
+
+            EffectTween:Play()
+
+            EffectTween.Completed:Connect(function()
+                Clicked:Destroy()
+            end)
+        end
 
 		local ButtonContainer = Instance.new("TextButton")
 		ButtonContainer.Name = "Button"
@@ -300,9 +308,12 @@ function library:Create(name, size)
 		Click.Image = "http://www.roblox.com/asset/?id=5837528348"
 
 		ButtonContainer.MouseButton1Click:connect(function()
-			spawn(function()
+			task.spawn(function()
 				pcall(callback)
 			end)
+            task.spawn(function()
+                ClickEffect(ButtonContainer)
+            end)
 		end)
 
 		local hovered = ts:Create(ButtonContainer, ti(0.2), {BackgroundColor3 = library.buttoncontainerhovered})
