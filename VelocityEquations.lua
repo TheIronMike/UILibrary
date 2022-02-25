@@ -103,6 +103,8 @@ end
 
 return {
     Linear = Linear,
+    In_Linear = Linear,
+    Out_Linear = Linear,
     -- In
     In_Quad = In_Quad,
     In_Cubic = In_Cubic,
